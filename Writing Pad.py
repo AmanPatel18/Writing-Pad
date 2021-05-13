@@ -123,12 +123,12 @@ def about():
     l4=Label(new_win,text=body2,font='Ariel 12 italic',bg='#7782e6').place(x=0,y=175)
     l5=Label(new_win,text=credit,font='Ariel 12 bold',bg='#7782e6').place(x=0,y=220)
     l6=Label(new_win,text=email,font='Ariel 12 bold',bg='#7782e6').place(x=0,y=250)
-
-#def change_style():
     
-  
-
 def menu_bar():
+    global file_menu
+    global edit_menu
+    global tool_menu
+    global help_menu
     #declare main menu
 
     main_menu=Menu(win)                                     # Menu Bar
@@ -142,8 +142,8 @@ def menu_bar():
     edit_menu=Menu(main_menu,font="Helvetica 10 normal",tearoff=0)     # Edit Menu
     main_menu.add_cascade(label='Edit',menu=edit_menu)
 
-    #tool_menu=Menu(main_menu,font='Helvetica 10 normal',tearoff=0)
-    #main_menu.add_cascade(label='Tools',menu=tool_menu)
+    tool_menu=Menu(main_menu,font='Helvetica 10 normal',tearoff=0)
+    main_menu.add_cascade(label='Tools',menu=tool_menu)
 
     help_menu=Menu(main_menu,font="Helvetica 10 normal",tearoff=0)     # Help Menu
     main_menu.add_cascade(label='Help',menu=help_menu)
@@ -174,7 +174,12 @@ def menu_bar():
     edit_menu.add_command(label='Undo     Ctrl+Z',command=text_field.edit_undo)
     edit_menu.add_separator()
     edit_menu.add_command(label='Redo     Ctrl+Y',command=text_field.edit_redo)
-    
+
+    #tool menu commands
+    tool_menu.add_command(label="Dark Mode On", command=dark_on)
+    tool_menu.add_separator()
+    tool_menu.add_command(label="Dark Mode Off", command=dark_off)
+
     #help menu commands
 
     help_menu.add_command(label='About',command=about)
@@ -183,6 +188,34 @@ def menu_bar():
 
     win.bind('<Control-s>',save_file2)
     win.bind('<Control-Shift-KeyPress-S>',save_as_file2)
+
+# Turn on dark Mode
+def dark_on():
+	main_color = "SystemButtonFace"
+	second_color = "SystemButtonFace"
+	text_color = "white"
+
+	win.config(bg=main_color)
+	text_field.config(bg="black",fg=text_color)
+	# file menu colors
+	file_menu.config(bg=main_color)
+	edit_menu.config(bg=main_color)
+	help_menu.config(bg=main_color)
+	tool_menu.config(bg=main_color)
+
+# Turn Off dark Mode:
+def dark_off():
+	main_color = "SystemButtonFace"
+	second_color = "SystemButtonFace"
+	text_color = "black"
+
+	win.config(bg=main_color)
+	text_field.config(bg="white",fg="black")
+	# file menu colors
+	file_menu.config(bg=main_color)
+	edit_menu.config(bg=main_color)
+	help_menu.config(bg=main_color)
+	tool_menu.config(bg=main_color)
 
 # main text field
 
